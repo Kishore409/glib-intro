@@ -4,10 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>Introduction to GObject and GMainLoop</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="description" content="Introduction to GObject and GMainLoop">
+		<meta name="author" content="Sunjin Yang">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -38,23 +38,56 @@
 			<div class="slides">
 
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>HTML Presentations Made Easy</h3>
+					<h1>Introduction to<br>GObject and GMainLoop</h1>
+					<h3>GNOME Asia Summit 2013</h3>
 					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
+						<small>Presented by <a href="http://sunjinyang.wordpress.com/">Sunjin Yang</a> / <a href="https://plus.google.com/104301831973257493290/">+Sunjin Yang</a></small>
 					</p>
 				</section>
 
 				<section>
-					<h2>Heads Up</h2>
-					<p>
-						reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
-						support for CSS 3D transforms to see it in its full glory.
-					</p>
+					<h2>Table of Contents</h2>
+					<ul>
+						<li>What is GLib?</li>
+						<li>...</li>
+						<li>...</li>
+						<li>...</li>
+						<li>...</li>
+						<li>...</li>
+						<li>...</li>
+						<li>...</li>
+						<li>...</li>
+						<li>...</li>
+						<li>...</li>
+						<li>Q &amp; A</li>
+					</ul>
+				</section>
 
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
+				<section>
+					<h2>What is GLib? (Official)</h2>
+					<p>
+						<a href="https://developer.gnome.org/glib/">GLib</a> is a <strong>general-purpose utility library</strong>, which provides many useful data types, macros, type conversions, string utilities, file utilities, a mainloop abstraction, and so on. It works on many UNIX-like platforms, as well as Windows and OS X.
+					</p>
+					<p class="fragment">
+						<a href="https://developer.gnome.org/glib/">GLib</a> provides the core application building blocks for libraries and applications written in C. It provides <strong>the core object system used in GNOME</strong>, <strong>the main loop implementation</strong>, and a large set of utility functions for strings and common data structures.
+					</p>
+					<p class="fragment">
+						<strong>GObject</strong> and <strong>GMainLoop</strong>!
+					</p>
+				</section>
+
+
+				<section>
+					<h2>What is GLib? (Unofficial)</h2>
+					<p class="fragment">
+						<a href="https://developer.gnome.org/glib/">GLib</a> is not <a href="http://www.gnu.org/software/libc/">The GNU C Library (glibc)</a>!
+ 					</p>
+					<p class="fragment">
+						<a href="https://developer.gnome.org/glib/">GLib</a> is to <strong>C</strong> what STL + <a href="http://www.boost.org/">Boost</a> is to <strong>C++</strong>?
+					</p>
+					<p class="fragment">
+						It can be also used in other C/C++ apps!
+					</p>
 				</section>
 
 				<!-- Example of nested vertical slides -->
