@@ -64,61 +64,68 @@
 				</section>
 
 				<section>
-					<h2>What is GLib? (Official)</h2>
-					<p>
-						<a href="https://developer.gnome.org/glib/">GLib</a> is a <strong>general-purpose utility library</strong>, which provides many useful data types, macros, type conversions, string utilities, file utilities, a mainloop abstraction, and so on. It works on many UNIX-like platforms, as well as Windows and OS X.
-					</p>
-					<p class="fragment">
-						<a href="https://developer.gnome.org/glib/">GLib</a> provides the core application building blocks for libraries and applications written in C. It provides <strong>the core object system used in GNOME</strong>, <strong>the main loop implementation</strong>, and a large set of utility functions for strings and common data structures.
-					</p>
-					<p class="fragment">
-						<strong>GObject</strong> and <strong>GMainLoop</strong>!
-					</p>
-				</section>
-
-
-				<section>
-					<h2>What is GLib? (Unofficial)</h2>
-					<p class="fragment">
-						<a href="https://developer.gnome.org/glib/">GLib</a> is not <a href="http://www.gnu.org/software/libc/">The GNU C Library (glibc)</a>!
- 					</p>
-					<p class="fragment">
-						<a href="https://developer.gnome.org/glib/">GLib</a> is to <strong>C</strong> what STL + <a href="http://www.boost.org/">Boost</a> is to <strong>C++</strong>?
-					</p>
-					<p class="fragment">
-						It can be also used in other C/C++ apps!
-					</p>
-				</section>
-
-				<!-- Example of nested vertical slides -->
-				<section>
 					<section>
-						<h2>Vertical Slides</h2>
+						<h2>What is GLib? (Official)</h2>
 						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#" class="navigate-down">down</a>.
+							<a href="https://developer.gnome.org/glib/">GLib</a> is a <strong>general-purpose utility library</strong>, which provides many useful data types, macros, type conversions, string utilities, file utilities, a mainloop abstraction, and so on. It works on many UNIX-like platforms, as well as Windows and OS X.
 						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
+						<p class="fragment">
+							<a href="https://developer.gnome.org/glib/">GLib</a> provides the core application building blocks for libraries and applications written in C. It provides <strong>the core object system used in GNOME</strong>, <strong>the main loop implementation</strong>, and a large set of utility functions for strings and common data structures.
+						</p>
+						<p class="fragment">
+							<strong>GObject</strong> and <strong>GMainLoop</strong>!
+						</p>
+					</section>
+
+					<section>
+						<h2>What is GLib? (Unofficial)</h2>
+						<p class="fragment">
+							<a href="https://developer.gnome.org/glib/">GLib</a> is not <a href="http://www.gnu.org/software/libc/">The GNU C Library (glibc)</a>!
+						</p>
+						<p class="fragment">
+							<a href="https://developer.gnome.org/glib/">GLib</a> is to <strong>C</strong> what STL + <a href="http://www.boost.org/">Boost</a> is to <strong>C++</strong>?
+						</p>
+						<p class="fragment">
+							It can be also used in other C/C++ apps!
+						</p>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>GObject System</h2>
+						<ul>
+							<li>A Generic Type System</li>
+							<ul>
+								<li>Single-inherited and interface types</li>
+								<li>A collection of fundamental types</li>
+							</ul>
+							<li>Object Properties</li>
+							<li>A Signal System</li>
+							<li>Extensible Parameter / Value System</li>
+						</ul>
+						<p>
+							&nbsp;
+						</p>
+						<blockquote class="fragment" cite="http://www.tux.org/lkml/#s15-3">
+							What’s important about object-oriented programming is the techniques, not the languages used.
+						</blockquote>
 					</section>
 					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
+						<h2>GObject Base Class</h2>
+						<ul>
+							<li>Memory management with reference counting</li>
+							<li>Construction / Destruction of instances</li>
+							<li>Generic per-object properties with set / get function pairs</li>
+							<li>Easy use of signals</li>
+						</ul>
+						<p>
+							&nbsp;
+						</p>
+						<p class="fragment highlight-red">
+							<strong>This is one of the today's topics!</strong>
+						</p>
 					</section>
 				</section>
 
