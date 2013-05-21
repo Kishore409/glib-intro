@@ -526,11 +526,11 @@ g_source_remove (id);
 					<section>
 						<h2>Pre-defined Event Priorities</h2>
 						<ul>
-							<li>G_PRIORITY_HIGH(-100)</li>
-							<li>G_PRIORITY_DEFAULT(0): timeout</li>
-							<li>G_PRIORITY_HIGH_IDLE(100)</li>
-							<li>G_PRIORITY_DEFAULT_IDLE(200): idle</li>
-							<li>G_PRIORITY_LOW(300)</li>
+							<li><code>G_PRIORITY_HIGH</code> (-100)</li>
+							<li><code>G_PRIORITY_DEFAULT</code> (0) : <strong>timeout</strong></li>
+							<li><code>G_PRIORITY_HIGH_IDLE</code> (100)</li>
+							<li><code>G_PRIORITY_DEFAULT_IDLE</code> (200) : <strong>idle</strong></li>
+							<li><code>G_PRIORITY_LOW</code> (300)</li>
 						</ul>
 						<p>
 							<strong>&nbsp;</strong>
@@ -566,10 +566,10 @@ g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE - 10,
 					<section>
 						<h2>GUI-specific Event Priorities</h2>
 						<ul>
-							<li>GDK_PRIORITY_EVENT(0) : X / Backend events</li>
-							<li>GDK_PRIORITY_REDRAW(120): GTK+ redrawing</li>
-							<li>CLUTTER_PRIORITY_EVENT(0) : GLX / Backend events</li>
-							<li>CLUTTER_PRIORITY_REDRAW(150): Clutter redrawing</li>
+							<li><code>GDK_PRIORITY_EVENT</code> (0) : X / Backend events</li>
+							<li><code>GDK_PRIORITY_REDRAW</code> (120) : GTK+ redrawing</li>
+							<li><code>CLUTTER_PRIORITY_EVENT</code> (0) : GLX / Backend events</li>
+							<li><code>CLUTTER_PRIORITY_REDRAW</code> (150) : Clutter redrawing</li>
 						</ul>
 						<p>
 							<strong>&nbsp;</strong>
@@ -614,6 +614,12 @@ g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE - 10,
 							<li>Unix Signals</li>
 							<li>Customized Polling</li>
 						</ul>
+						<p>
+							&nbsp;
+						</p>
+						<p class="fragment">
+							Note that all idle / timeout / event source functions are thread-safe.
+						</p>
 					</section>
 				</section>
 
