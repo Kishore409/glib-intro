@@ -308,7 +308,7 @@ g_free (str);
 					<section>
 						<h2>Property Values</h2>
 						<p>
-							Note that all values via <code>g_object_{get/set}()</code> are duplicated or object referenced!
+							Note that most values via <code>g_object_{get/set}()</code> are duplicated or object referenced!
 						</p>
 						<pre><code class="language-cpp">
 ClutterTextBuffer *buf;
@@ -341,11 +341,25 @@ void               clutter_text_set_buffer (ClutterText       *self,
 						</code></pre>
 						<p class="fragment">
 							Note that not all parameters are duplicated or object referenced,
-							Check reference manual carefully.
+							check reference manual carefully.
 						</p>
 						<p class="fragment">
 							If it's ambiguous, check the source, Luke!
 						</p>
+					</section>
+					<section>
+						<h2>Property Binding</h2>
+						<pre><code class="language-cpp">
+GtkWidget *button = gtk_check_button_new_with_label ("iPhone User");
+GtkWidget *entry = gtk_entry_new (); /* iPhone Model Name */
+g_object_bind_property (button, "active",
+                        entry, "sensitive",
+                        G_BINDING_SYNC_CREATE);
+						</code></pre>
+						<p class="fragment">
+							Check <code>GBindingFlags</code> and <code>g_object_bind_property_full()</code>
+							for more use cases.
+						</p>						
 					</section>
 				</section>
 
@@ -371,7 +385,7 @@ void               clutter_text_set_buffer (ClutterText       *self,
 						</p>
 						<p class="fragment">
 							These are most defined statically in class definition code,
-							Check reference manuals for the object!
+							check reference manuals for the object!
 						</p>
 					</section>
 					<section>
