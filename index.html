@@ -49,15 +49,13 @@
 						<ul>
 							<li>What is GLib?</li>
 							<li>GObject System</li>
-							<li>Object Instantiation</li>
+							<li>Object Instances</li>
 							<li>Reference Count</li>
 							<li>Properties</li>
 							<li>Signals</li>
-							<li>Event Loop</li>
-							<li>Idle Handler</li>
-							<li>Timeout Handler</li>
-							<li>Event Priority</li>
-							<li>Tips</li>
+							<li>Main Event Loop</li>
+							<li>Idle / Timeout Functions</li>
+							<li>Event Priorities</li>
 							<li>Q &amp; A</li>
 						</ul>
 					</section>
@@ -132,7 +130,7 @@
 
 				<section>
 					<section>
-						<h2>Object Instantiation</h2>
+						<h2>Object Instances</h2>
 						<p>
 							<code>g_object_new()</code> can be used to instantiate any GType which inherits from the GObject base type.
 						</p>
@@ -193,7 +191,7 @@ clutter_actor_new (void)
 					<section>
 						<h2>Reference Count</h2>
 						<p>
-							The reference count of all newly created objects is one. When the reference count reaches zero, objects are destoryed (disposed and finalized).
+							The reference count of all newly created objects is one. When the reference count reaches zero, objects are destroyed (disposed and finalized).
 						</p>
 						<p class="fragment">
 							you can increase and decrease the reference count with <code>g_object_ref()</code> / <code>g_object_unref()</code> functions respectively.
@@ -318,9 +316,9 @@ gchar *str;
 gboolean markup;
 
 g_object_get (G_OBJECT (text), /* ClutterText */
-              "buffer", &buf,
-              "text", &str,
-              "use-markup", &markup,
+              "buffer", &amp;buf,
+              "text", &amp;str,
+              "use-markup", &amp;markup,
               NULL);
 ...
 g_free (str);
@@ -442,6 +440,180 @@ g_signal_connect (text, /* ClutterText */
 							Check <code>g_object_notify()</code>, <code>g_object_freeze_notify()</code>
 							and <code>g_object_thaw_notify()</code> functions. 
 						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Main Event Loop</h2>
+						<p>
+							The main event loop manages all the available sources of events for GLib and other applications.
+						</p>
+						<p>
+						 These events can come from any number of different types of sources such as X events, file descriptors (plain files, pipes or sockets) and timeouts.
+						</p>
+					</section>
+					<section>
+						<h2>Main Event Loop Creation</h2>
+						<pre><code class="language-cpp">
+GMainLoop *loop = g_main_loop_new (NULL, FALSE);
+
+/* Run endless loop until g_main_loop_quit() is called. */
+g_main_loop_run (loop);
+						</code></pre>
+						<p class="fragment">
+							A main context is linked to a main loop.
+						</p>
+						<p class="fragment">
+							The default main loop is used in most toolkit systems.
+						</p>
+						<p class="fragment">
+							Check <code>gtk_main()</code> / <code>gtk_main_quit()</code> and
+							<code>clutter_main()</code> / <code>clutter_main_quit()</code> source.
+						</p>
+					</section>
+					<section>
+						<h2>Main Event Loops in Other Threads</h2>
+						<p>
+							Extra Main Event Loop:
+						</p>
+						<pre class="fragment"><code class="language-cpp">
+GMainContext *context = g_main_context_new ();
+GMainLoop *loop = g_main_loop_new (context, FALSE);
+g_main_loop_run (loop);
+						</code></pre>
+						<p>
+							Main Event Loop per Thread: (since 2.22)
+						</p>
+						<pre class="fragment"><code class="language-cpp">
+GMainContext *context = g_main_context_new ();
+g_main_context_push_thread_default (context);
+...
+GMainLoop *loop = g_main_loop_new (loop, FALSE);
+g_main_loop_run (loop);
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Idle / Tile Functions</h2>
+						<pre><code class="language-cpp">
+static gboolean one_time (gpointer data)
+{
+	g_print ("hello, idle %d!\n", GPOINTER_TO_INT (data));
+	return G_SOURCE_REMOVE; /* FALSE before 2.32 */
+}
+...
+g_idle_add (one_time, GINT_TO_POINTER (100));
+						</code></pre>
+						<pre><code class="language-cpp">
+static gboolean periodic (gpointer data)
+{
+	int *counter = data;
+	g_print ("hello, timeout %d!\n", *counter);
+	(*counter)++;
+	return G_SOURCE_CONTINUE; /* TRUE before 2.32 */
+}
+...
+int a = 0;
+guint id = g_timeout_add (1000, periodic, &amp;a);
+        /* g_timeout_add_seconds (1, periodic, &amp;a); */
+...
+g_source_remove (id);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Pre-defined Event Priorities</h2>
+						<ul>
+							<li>G_PRIORITY_HIGH(-100)</li>
+							<li>G_PRIORITY_DEFAULT(0): timeout</li>
+							<li>G_PRIORITY_HIGH_IDLE(100)</li>
+							<li>G_PRIORITY_DEFAULT_IDLE(200): idle</li>
+							<li>G_PRIORITY_LOW(300)</li>
+						</ul>
+						<p>
+							<strong>&nbsp;</strong>
+						</p>
+						<p class="fragment">
+							You can use other priorities also freely at your own risk!
+						</p>
+					</section>
+					<section>
+						<h2>Full Idle / Timeout Functions</h2>
+						<pre><code class="language-cpp">
+static gboolean one_time (gpointer data)
+{
+	g_print ("hello, idle '%s'!\n", (gchar *) data);
+	return G_SOURCE_REMOVE; /* FALSE */
+}
+...
+g_idle_add_full (G_PRIORITY_HIGH_IDLE,
+                 one_time,
+                 g_strdup ("GNOME Asia"),
+                 g_free);
+						</code></pre>
+						<pre><code class="language-cpp">
+...
+int a = 0;
+g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE - 10,
+                    1000,
+                    periodic,
+                    &amp;a,
+                    NULL);
+						</code></pre>
+					</section>
+					<section>
+						<h2>GUI-specific Event Priorities</h2>
+						<ul>
+							<li>GDK_PRIORITY_EVENT(0) : X / Backend events</li>
+							<li>GDK_PRIORITY_REDRAW(120): GTK+ redrawing</li>
+							<li>CLUTTER_PRIORITY_EVENT(0) : GLX / Backend events</li>
+							<li>CLUTTER_PRIORITY_REDRAW(150): Clutter redrawing</li>
+						</ul>
+						<p>
+							<strong>&nbsp;</strong>
+						</p>
+						<p class="fragment">
+							If you need to update some GUI information, use higher priority than redrawing operation, which optimizes several drawing requests. 
+						</p>
+						<p class="fragment">
+							But, too many higher events will prevent GUI events from being processed to freeze GUI.
+						</p>
+					</section>
+					<section>
+						<h2>Idle / Timeout on Extra Loops</h2>
+						<pre><code class="language-cpp">guint g_idle_add_context (GMainContext  *context,
+                          gint           priority,
+                          GSourceFunc    func,
+                          gpointer       user_data,
+                          GDestroyNotify notify) {
+  GSource *src; guint id;
+
+  src = g_idle_source_new ();
+  g_source_set_priority (src, priority);
+  g_source_set_callback (src, func, user_data, notify);
+  id = g_source_attach (src,
+         context ? context : g_main_context_get_thread_default ());
+  g_source_unref (src);
+
+  return id;
+}						</code></pre>
+						<pre><code class="language-cpp">
+  ...
+  src = g_timeout_source_new (interval);
+  ...
+						</code></pre>						
+					</section>
+					<section>
+						<h2>More Event Sources</h2>
+						<ul>
+							<li>Unix File Descriptors : file, pipe</li>
+							<li>IO Channels : socket, file</li>
+							<li>Child Process State</li>
+							<li>Unix Signals</li>
+							<li>Customized Polling</li>
+						</ul>
 					</section>
 				</section>
 
