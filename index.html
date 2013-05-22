@@ -361,6 +361,21 @@ g_object_bind_property (button, "active",
 							for more use cases.
 						</p>						
 					</section>
+					<section>
+						<h2>User Data on Objects</h2>
+						<pre><code class="language-cpp">
+g_object_set_data_full (G_OBJECT (obj),
+                        "private-name", g_strdup ("Smigol"),
+                        g_free);
+/* g_object_set_data (G_OBJECT (obj), "private-name", "Smigol"); */
+...
+gchar *priv_name;
+priv_name = g_object_get_data (G_OBJECT (obj), "private-name");
+						</code></pre>
+						<p class="fragment">
+							These functions can be used as an hash table per object. 
+						</p>
+					</section>
 				</section>
 
 				<section>
