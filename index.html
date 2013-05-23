@@ -277,7 +277,7 @@ g_object_unref (parent); /* Destroy an stage with all children. */
 							It is used for notification when an object is finalized.
 						</p>
 						<p class="fragment">
-							They are called "weak references" because they allow you to safely hold a pointer to an object without calling g_object_ref() (g_object_ref() adds a strong reference, that is, forces the object to stay alive).
+							They are called "weak references" because they allow you to safely hold a pointer to an object without calling <code>g_object_ref()</code> (<code>g_object_ref()</code> adds a strong reference, that is, forces the object to stay alive).
 						</p>
 					</section>
 					<section>
@@ -312,7 +312,7 @@ for (i = 0; i &lt; 10; i++) {
 							&nbsp;
 						</p>
 						<p class="fragment">
-							These are most defined statically in class definition code,
+							They are mostly defined statically in class definition code,
 							Check reference manuals for the object!
 						</p>
 					</section>
@@ -401,7 +401,7 @@ gchar *priv_name;
 priv_name = g_object_get_data (G_OBJECT (obj), "private-name");
 						</code></pre>
 						<p class="fragment">
-							These functions can be used as an hash table per object. 
+							It can be used as an hash table per object. 
 						</p>
 					</section>
 				</section>
@@ -427,7 +427,7 @@ priv_name = g_object_get_data (G_OBJECT (obj), "private-name");
 							&nbsp;
 						</p>
 						<p class="fragment">
-							These are most defined statically in class definition code,
+							They are mostly defined statically in class definition code,
 							check reference manuals for the object!
 						</p>
 					</section>
@@ -507,7 +507,7 @@ g_signal_connect (text, /* ClutterText */
 							The main event loop manages all the available sources of events for GLib and other applications.
 						</p>
 						<p>
-						 These events can come from any number of different types of sources such as X events, file descriptors (plain files, pipes or sockets) and timeouts.
+						 Events can come from any number of different types of sources such as X events, file descriptors (plain files, pipes or sockets) and timeouts.
 						</p>
 					</section>
 					<section>
